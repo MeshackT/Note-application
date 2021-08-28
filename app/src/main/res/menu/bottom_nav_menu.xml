@@ -3,7 +3,6 @@
     <item
         android:id="@+id/activity_main"
         android:icon="@drawable/ic_baseline_add_24"
-        android:visible="true"
         android:title="Add" />
     <item
         android:id="@+id/activity_reload"
