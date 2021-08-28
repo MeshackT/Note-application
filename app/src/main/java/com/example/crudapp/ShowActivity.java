@@ -135,7 +135,6 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
                             Model model = new Model(snapshot.getString("id"),
                                     snapshot.getString("title"), snapshot.getString("desc"));
                             list.add(model);
-
                         }
                         adapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.INVISIBLE);
@@ -156,10 +155,6 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         if (item.getItemId() == R.id.activity_main) {
             Intent intent = new Intent(ShowActivity.this, MainActivity.class);
             startActivity(intent);
-        }else if(item.getItemId() == R.id.activity_reload){
-            //////////////////////
-            list.clear();
-            showData();
         }
         return false;
     }
@@ -170,7 +165,6 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         mTTS.speak(model.getDesc(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
-
 
     @Override
     protected void onDestroy() {

@@ -1,23 +1,28 @@
 package com.example.crudapp;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.RecognizerIntent;
+import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +31,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -48,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         //check if permission is granted to use the mic on ur device
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO))
                 != PackageManager.PERMISSION_GRANTED) {
             checkPermission();
         }
@@ -72,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //get information from MyAdapter class
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            mSavebtn.setText("Updated");
+            mSavebtn.setText("Update");
             uTitle = bundle.getString("uTitle");
             uDesc = bundle.getString("uDesc");
             uId = bundle.getString("uId");
@@ -117,14 +126,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 if (bundle != null) {
                     String id = uId;
                     updateToFireStore(id, title, desc);
-                    clearControls();
                 } else {
                     String id = UUID.randomUUID().toString();
                     saveToFireStore(id, title, desc);
-                    clearControls();
 
                 }
-
+                clearControls();
 
             }
         });
@@ -221,6 +228,4 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return false;
     }
-
-
 }

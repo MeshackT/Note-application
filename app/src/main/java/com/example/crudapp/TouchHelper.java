@@ -56,6 +56,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             int position = viewHolder.getAdapterPosition();
+                            adapter.deleteData(position);
                             adapter.notifyItemRemoved(position);
                             adapter.notifyItemChanged(viewHolder.getAdapterPosition());
 
