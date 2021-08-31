@@ -146,6 +146,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                 }).create().show();
             }
         });
+
+        //type of option to sent to
+        holder.share_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody =  mList.get(position).getDesc();
+                String shareSub = mList.get(position).getTitle();
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                activity.startActivity(Intent.createChooser(sharingIntent, "Share using"));
+            }
+        });
     }
 
     @Override
@@ -196,7 +210,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
         TextView title, desc;
         Button speak;
-        ImageView edit_card, delete_card,upload_card;
+        ImageView edit_card, delete_card,share_card;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -206,7 +220,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             speak = itemView.findViewById(R.id.speak);
             edit_card = itemView.findViewById(R.id.edit_card);
             delete_card = itemView.findViewById(R.id.delete_card);
-            upload_card = itemView.findViewById(R.id.upload_card);
+            share_card = itemView.findViewById(R.id.share_card);
         }
     }
 

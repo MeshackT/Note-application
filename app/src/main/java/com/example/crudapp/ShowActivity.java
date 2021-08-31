@@ -50,7 +50,7 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
     private Button speak;
     private ProgressBar progressBar;
 
-//    private ImageView edit_card,upload_cloud,delete_card;
+//    private ImageView edit_card,share_cloud,delete_card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
