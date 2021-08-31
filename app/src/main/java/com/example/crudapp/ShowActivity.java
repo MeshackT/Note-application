@@ -50,6 +50,8 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
     private Button speak;
     private ProgressBar progressBar;
 
+//    private ImageView edit_card,upload_cloud,delete_card;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +78,12 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         speak = findViewById(R.id.speak);
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
+        //icons on the card
+//        edit_card = findViewById(R.id.edit_card);
+//        upload_cloud = findViewById(R.id.upload_card);
+//        delete_card =findViewById(R.id.delete_card);
 
+        //bottom navigation bar
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.activity_show);
@@ -158,13 +165,6 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         }
         return false;
     }
-    public void speak(){
-        Model model = null;
-        //model.getTitle()
-        mTTS.speak(model.getTitle(), TextToSpeech.QUEUE_FLUSH, null);
-        mTTS.speak(model.getDesc(), TextToSpeech.QUEUE_FLUSH, null);
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -174,6 +174,10 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         }
         super.onDestroy();
     }
+
+
+
+
 }
 
 
