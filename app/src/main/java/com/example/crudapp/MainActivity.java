@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setSelectedItemId(R.id.activity_main);
         bottomNavigationView.getMenu().findItem(R.id.activity_reload).setVisible(false);
 
-
         mTitle = findViewById(R.id.edit_title);
         mDesc = findViewById(R.id.edit_desc);
         mSavebtn = findViewById(R.id.save_btn);

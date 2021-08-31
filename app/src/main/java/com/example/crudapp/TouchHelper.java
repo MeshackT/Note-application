@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -16,6 +18,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
 
 
     private MyAdapter adapter;
+    private ShowActivity activity;
 
     public TouchHelper(MyAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
@@ -34,7 +37,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
         if (direction == ItemTouchHelper.LEFT) {
 
             new AlertDialog.Builder(viewHolder.itemView.getContext())
-                    .setMessage("Are you sure?")
+                    .setMessage("Are you sure that you want to update?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -49,9 +52,9 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }
             }).create().show();
-        }else if(direction == ItemTouchHelper.RIGHT){
+        } else if (direction == ItemTouchHelper.RIGHT) {
             new AlertDialog.Builder(viewHolder.itemView.getContext())
-                    .setMessage("Are you sure?")
+                    .setMessage("Do you want to delete?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -60,6 +63,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                             adapter.notifyItemRemoved(position);
                             adapter.notifyItemChanged(viewHolder.getAdapterPosition());
 
+
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
@@ -67,7 +71,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }
             }).create().show();
-        }else if (direction == ItemTouchHelper.ACTION_STATE_IDLE){
+        } else if (direction == ItemTouchHelper.ACTION_STATE_IDLE) {
             adapter.speak2(position);
             adapter.notifyItemChanged(viewHolder.getAdapterPosition());
 
@@ -88,7 +92,6 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                 .decorate();
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-
 
 
     }

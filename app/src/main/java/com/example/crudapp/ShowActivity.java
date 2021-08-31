@@ -56,6 +56,9 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //initialize
         mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override

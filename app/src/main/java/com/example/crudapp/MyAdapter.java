@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -223,7 +224,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             share_card = itemView.findViewById(R.id.share_card);
         }
     }
-
+/////////////////////////play button///////////////////////////////////////
     public void speak(int position) {
         Model item = mList.get(position);
         activity.mTTS.speak(item.getTitle(), TextToSpeech.QUEUE_FLUSH, null);
@@ -235,4 +236,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         activity.mTTS.speak(item.getDesc(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
+    /////////////////////////play ends///////////////////////////////////////
+
+    //Snack button when deleting shows
+
+//private void snackBar(){
+//
+//    Snackbar snackbar = Snackbar
+//            .make(activity, "Message is deleted", Snackbar.LENGTH_LONG)
+//            .setAction("UNDO", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                }
+//            }).show();
+//
+//    snackbar.show();
+//
+//}
+
+
+
 }
