@@ -12,22 +12,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class TouchHelper extends ItemTouchHelper.SimpleCallback {
 
 
-    private MyAdapter adapter;
+    private final MyAdapter adapter;
     private ShowActivity activity;
+    private final List<Model> mList;
 
-    public TouchHelper(MyAdapter adapter) {
-        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+
+    public TouchHelper(MyAdapter adapter, List<Model> mList) {
+        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+                ItemTouchHelper.START | ItemTouchHelper.END,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
+        this.mList = mList;
     }
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView,
                           @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+
+        final int position = viewHolder.getAdapterPosition();
+        int toPosition = target.getAdapterPosition();
+        recyclerView.getAdapter().notifyItemMoved(position,toPosition);
+        Collections.swap(mList, position,toPosition);
         return false;
     }
 

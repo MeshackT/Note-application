@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Stack;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -47,9 +48,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private Button mSavebtn, mMicrophone;
     private EditText mTitle, mDesc;
     private String uTitle, uDesc, uId;
+    private String imageCapture;
     private FirebaseFirestore db;
     BottomNavigationView bottomNavigationView;
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             map.put("id", id);
             map.put("title", title);
             map.put("desc", desc);
+            map.values().toArray();
 
             //add a collection of documents with Id then sub title and description
             db.collection("Documents").document(id).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {

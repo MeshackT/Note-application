@@ -81,15 +81,13 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         speak = findViewById(R.id.speak);
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
-        //icons on the card
-//        edit_card = findViewById(R.id.edit_card);
-//        upload_cloud = findViewById(R.id.upload_card);
-//        delete_card =findViewById(R.id.delete_card);
 
         //bottom navigation bar
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.activity_show);
+        bottomNavigationView.getMenu().findItem(R.id.activity_camera).setVisible(false);
+
 
         //setting the way cards should show on a recycle view
         recyclerView = findViewById(R.id.recycleView);
@@ -102,7 +100,7 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
 
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchHelper(adapter));
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchHelper(adapter, list));
         touchHelper.attachToRecyclerView(recyclerView);
         showData();
 
@@ -131,8 +129,6 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
         return super.onCreateOptionsMenu(menu);
-
-
     }
 
     public void showData(){
@@ -165,6 +161,8 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         if (item.getItemId() == R.id.activity_main) {
             Intent intent = new Intent(ShowActivity.this, MainActivity.class);
             startActivity(intent);
+        }else if(item.getItemId() == R.id.activity_reload){
+            showData();
         }
         return false;
     }
@@ -177,15 +175,4 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
         }
         super.onDestroy();
     }
-
-
-
-
 }
-
-
-
-
-
-
-

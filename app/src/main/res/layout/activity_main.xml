@@ -7,18 +7,18 @@
     android:paddingTop="0dp"
     tools:context=".MainActivity">
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycleView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="529dp"-->
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/recycleView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="529dp"-->
 
-<!--        app:layout_constraintBottom_toTopOf="@+id/microphone"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/microphone"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
+    <!--    </androidx.recyclerview.widget.RecyclerView>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -88,19 +88,22 @@
         android:text="Save"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView" />
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_marginBottom="0dp"
         android:background="@color/purple_200"
         app:itemTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="0dp"
         app:menu="@menu/bottom_nav_menu" />
 
 

@@ -3,8 +3,11 @@ package com.example.crudapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +15,17 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -29,10 +34,17 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable {
 
-    private ShowActivity activity;
+//    public  TextView title, desc;
+//    public  Button speak;
+//    public  ImageView edit_card, delete_card,share_card;
+//    public  LinearLayout mlayout;
+//    public  CardView cardView;
 
-    private List<Model> mList;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private final ShowActivity activity;
+
+    private final List<Model> mList;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public MyAdapter(ShowActivity activity, List<Model> mList) {
         this.activity = activity;
@@ -81,6 +93,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
     }
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -92,6 +105,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(mList.get(position).getTitle());
         holder.desc.setText(mList.get(position).getDesc());
+
         holder.speak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,13 +168,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             public void onClick(View v) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBody =  mList.get(position).getDesc();
+                String shareBody = mList.get(position).getDesc();
                 String shareSub = mList.get(position).getTitle();
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 activity.startActivity(Intent.createChooser(sharingIntent, "Share using"));
             }
         });
+
+        //card Expand
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Toast.makeText(activity, "clicked card title: " + holder.title, Toast.LENGTH_SHORT).show();
+                int view = ((holder.desc.getVisibility()) == View.GONE) ? View.VISIBLE : View.GONE;
+                TransitionManager.beginDelayedTransition(holder.mlayout, new AutoTransition());
+                holder.desc.setVisibility(view);
+
+
+            }
+        });
+
     }
 
     @Override
@@ -202,16 +232,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         @Override
         protected void publishResults(CharSequence constraint, FilterResults filterResults) {
             mList.clear();
+
             mList.addAll((Collection<? extends Model>) filterResults.values);
             notifyDataSetChanged();
         }
     };
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView title, desc;
         Button speak;
-        ImageView edit_card, delete_card,share_card;
+        ImageView edit_card, delete_card, share_card;
+        LinearLayout mlayout;
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -222,9 +254,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             edit_card = itemView.findViewById(R.id.edit_card);
             delete_card = itemView.findViewById(R.id.delete_card);
             share_card = itemView.findViewById(R.id.share_card);
+            mlayout = itemView.findViewById(R.id.layout);
+            cardView = itemView.findViewById(R.id.cardview);
+
         }
     }
-/////////////////////////play button///////////////////////////////////////
+
+    /////////////////////////play button///////////////////////////////////////
     public void speak(int position) {
         Model item = mList.get(position);
         activity.mTTS.speak(item.getTitle(), TextToSpeech.QUEUE_FLUSH, null);
@@ -237,24 +273,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
     }
     /////////////////////////play ends///////////////////////////////////////
-
-    //Snack button when deleting shows
-
-//private void snackBar(){
-//
-//    Snackbar snackbar = Snackbar
-//            .make(activity, "Message is deleted", Snackbar.LENGTH_LONG)
-//            .setAction("UNDO", new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                }
-//            }).show();
-//
-//    snackbar.show();
-//
-//}
-
 
 
 }

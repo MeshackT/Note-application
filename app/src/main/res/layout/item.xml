@@ -7,13 +7,17 @@
     android:layout_margin="13dp"
     android:background="#502767"
     android:outlineAmbientShadowColor="@color/black"
-    android:outlineSpotShadowColor="#880000"
-    app:cardElevation="3dp">
+    android:outlineSpotShadowColor="#9F0101"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="12dp"
+    >
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -60,6 +64,7 @@
             android:background="#F8F1FD"
             android:gravity="start"
             android:padding="8dp"
+            android:visibility="gone"
             android:text="Description:"
             android:textColor="#CB67E5"
             android:textSize="18sp" />
