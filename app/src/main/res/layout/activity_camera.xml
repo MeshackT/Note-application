@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CameraActivity"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="15dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Capture Image Text"
+        android:textColor="#9C27B0"
+        android:textSize="18sp"
+
+        />
+
+    <ImageView
+        android:id="@+id/captured_image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+    <EditText
+
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:editable="false"
+        android:gravity="center"
+        android:hint="Captured Image Text"
+
+        android:textColor="#9C27B0"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:id="@+id/capture_image_btn"
+            android:layout_width="145dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Capture"
+            android:gravity="center"
+            android:textColor="#9C27B0"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="399dp" />
+
+        <TextView
+            android:id="@+id/detect_text_btn"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Detect"
+            android:gravity="center"
+            android:textColor="#9C27B0"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="399dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Do you want to proceed?"
+            android:textColor="#9C27B0"
+            android:textSize="14sp"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="399dp" />
+
+        <TextView
+            android:id="@+id/pass_text_btn"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="5dp"
+            android:paddingStart="3dp"
+            android:backgroundTint="@color/white"
+            android:text="Proceed"
+            android:gravity="center"
+            android:textColor="#9C27B0"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-black"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="399dp" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/cancel_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
+        android:textColor="#9C27B0"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="399dp" />
+
+</LinearLayout>
