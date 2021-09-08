@@ -17,6 +17,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,12 +34,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable {
-
-//    public  TextView title, desc;
-//    public  Button speak;
-//    public  ImageView edit_card, delete_card,share_card;
-//    public  LinearLayout mlayout;
-//    public  CardView cardView;
 
 
     private final ShowActivity activity;
@@ -68,21 +63,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         Model item = mList.get(position);
         db.collection("Documents").document(item.getId()).delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                           @Override
-                                           public void onComplete(@NonNull Task<Void> task) {
-                                               if (task.isSuccessful()) {
-                                                   notifyRemoved(position);
-                                                   Toast.makeText(activity,
-                                                           item.getId() + " is delected", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            notifyRemoved(position);
 
-                                               } else {
-                                                   Toast.makeText(activity,
-                                                           "ERROR!\n" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(activity,
+                                    "ERROR!\n" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
-                                               }
-                                           }
+                        }
 
-                                       }
+                    }
+
+                }
                 );
     }
 
@@ -130,6 +124,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                                 int position = holder.getAdapterPosition();
                                 updateData(position);
                                 notifyDataSetChanged();
+
 
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -182,7 +177,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Toast.makeText(activity, "clicked card title: " + holder.title, Toast.LENGTH_SHORT).show();
                 int view = ((holder.desc.getVisibility()) == View.GONE) ? View.VISIBLE : View.GONE;
                 TransitionManager.beginDelayedTransition(holder.mlayout, new AutoTransition());
                 holder.desc.setVisibility(view);
@@ -190,6 +184,31 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
             }
         });
+        holder.reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Intent intent = new Intent(activity, ReminderActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+//        //time Peek card
+//        holder.show_time_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+
+//            public void onClick(View v) {
+//                holder.settime.setVisibility(View.VISIBLE);
+//                holder.set_time_btn.setVisibility(View.VISIBLE);
+//                holder.cancel_time_btn.setVisibility(View.VISIBLE);
+//
+//            }
+//        });
+//        holder.cancel_time_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                holder.settime.setVisibility(View.INVISIBLE);
+//            }
+//        });
 
     }
 
@@ -245,6 +264,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         LinearLayout mlayout;
         CardView cardView;
 
+        //Time Peeker
+        ImageView reminder;
+        TextView set_time_btn;
+        TextView cancel_time_btn;
+        TimePicker time_picker;
+
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -256,6 +282,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             share_card = itemView.findViewById(R.id.share_card);
             mlayout = itemView.findViewById(R.id.layout);
             cardView = itemView.findViewById(R.id.cardview);
+            //time Peeker
+            reminder = itemView.findViewById(R.id.reminder);
+//            show_time_btn = itemView.findViewById(R.id.show_time_set_btn);
+//            set_time_btn = itemView.findViewById(R.id.set_time_btn);
+//            cancel_time_btn = itemView.findViewById(R.id.cancel_time_btn);
+//            //the time card
+//            time_picker = itemView.findViewById(R.id.settime);
+
 
         }
     }

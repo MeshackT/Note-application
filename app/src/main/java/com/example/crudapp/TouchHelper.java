@@ -4,15 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +19,8 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private final MyAdapter adapter;
     private ShowActivity activity;
+    private MainActivity activityMain;
+
     private final List<Model> mList;
 
 
@@ -49,7 +47,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         final int position = viewHolder.getAdapterPosition();
         if (direction == ItemTouchHelper.LEFT) {
-
+            ///swipe left
             new AlertDialog.Builder(viewHolder.itemView.getContext())
                     .setMessage("Are you sure that you want to update?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -74,10 +72,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                         public void onClick(DialogInterface dialog, int which) {
                             int position = viewHolder.getAdapterPosition();
                             adapter.deleteData(position);
-                            adapter.notifyItemRemoved(position);
-                            adapter.notifyItemChanged(viewHolder.getAdapterPosition());
-
-
+                            adapter.notifyDataSetChanged();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override

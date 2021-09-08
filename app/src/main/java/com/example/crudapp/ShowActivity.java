@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -50,7 +51,6 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
     private Button speak;
     private ProgressBar progressBar;
 
-//    private ImageView edit_card,share_cloud,delete_card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +141,7 @@ public class ShowActivity extends AppCompatActivity implements BottomNavigationV
                             Model model = new Model(snapshot.getString("id"),
                                     snapshot.getString("title"), snapshot.getString("desc"));
                             list.add(model);
+                            
                         }
                         adapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.INVISIBLE);

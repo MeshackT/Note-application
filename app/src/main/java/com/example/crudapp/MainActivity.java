@@ -1,57 +1,47 @@
 package com.example.crudapp;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.speech.RecognizerIntent;
-import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Stack;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
     private Button mSavebtn, mMicrophone;
     private EditText mTitle, mDesc;
-    private String uTitle, uDesc, uId;
+    public String uTitle, uDesc, uId;
     private String imageCapture;
     private FirebaseFirestore db;
     BottomNavigationView bottomNavigationView;
+
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
+
 
 
     @Override
@@ -74,10 +64,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setSelectedItemId(R.id.activity_main);
         bottomNavigationView.getMenu().findItem(R.id.activity_reload).setVisible(false);
 
+
         mTitle = findViewById(R.id.edit_title);
         mDesc = findViewById(R.id.edit_desc);
         mSavebtn = findViewById(R.id.save_btn);
         mMicrophone = findViewById(R.id.microphone);
+
+        Intent intent = getIntent();
+        String text = intent.getStringExtra("one");
+        mTitle.setText(text);
+        Log.i("", mTitle.toString());
+
         db = FirebaseFirestore.getInstance();
 
         //get information from MyAdapter class
@@ -197,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             map.put("id", id);
             map.put("title", title);
             map.put("desc", desc);
-            map.values().toArray();
 
             //add a collection of documents with Id then sub title and description
             db.collection("Documents").document(id).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -227,6 +223,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         if (item.getItemId() == R.id.activity_show) {
             Intent intent = new Intent(MainActivity.this, ShowActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.activity_camera){
+            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
             startActivity(intent);
         }
         return false;
