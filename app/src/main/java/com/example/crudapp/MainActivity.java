@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         //check if permission is granted to use the mic on ur device
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO))
