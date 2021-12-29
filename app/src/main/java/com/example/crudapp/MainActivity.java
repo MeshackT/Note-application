@@ -12,17 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -67,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements
         bottomNavigationView.setSelectedItemId(R.id.activity_main);
         bottomNavigationView.getMenu().findItem(R.id.activity_reload).setVisible(false);
 
+//        recyclerView = findViewById(R.id.recycleViewmain);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mTitle = findViewById(R.id.edit_title);
         mDesc = findViewById(R.id.edit_desc);
