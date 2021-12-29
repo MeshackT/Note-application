@@ -47,8 +47,8 @@
 
             <Button
                 android:id="@+id/speak"
-                android:layout_width="65dp"
-                android:layout_height="47dp"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
                 android:background="@drawable/ic_baseline_play_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
